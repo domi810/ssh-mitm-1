@@ -45,6 +45,29 @@ class InjectServer(paramiko.ServerInterface):
         return True
 
 
+class SessionLogFormat:
+
+    def __init__(self, forwarder) -> None:
+        self.forwarder = forwarder
+
+    def stdin(self, data):
+        pass
+
+    def stdout(self, data):
+        pass
+
+
+class SessionLogScriptReplay(SessionLogFormat):
+
+    def __init__(self, forwarder) -> None:
+        super().__init__(forwarder)
+        self.fileIn = None
+        self.fileOut = None
+        self.timingfile = None
+
+
+
+
 class SSHMirrorForwarder(SSHForwarder):
     """Mirrors the shell to another client
     """
